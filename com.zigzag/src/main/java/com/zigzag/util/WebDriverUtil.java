@@ -16,7 +16,7 @@ public class WebDriverUtil {
 	
 	public String takeScreenshot(WebDriver driver,String screenShotName) throws IOException {
 		File takenScreenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		var folderPath = "test-output/ExtentReport/screenshots/"+timeStamp;
+		var folderPath = "test-output/screenshots/"+timeStamp;
 		new File(folderPath).mkdirs();
 		FileUtils.copyFile(takenScreenshot, new File(folderPath+"/"+screenShotName+".png"));
 		System.out.println("screenshots/"+timeStamp+"/"+screenShotName+".png");
