@@ -16,7 +16,8 @@ public class ExtentManager {
 	public static ExtentReports getInstance() {
 		if(extentReport == null) {
 			var timestamp = WebDriverUtil.getTimeStamp();
-			extentReport = createInstance("test-output/ZigZagAutomationReport"+timestamp+".html");
+//			extentReport = createInstance("test-output/ZigZagAutomationReport"+timestamp+".html");
+			extentReport = createInstance("test-output/ZigZagAutomationReport.html");
 		}	
 		return extentReport;
 	}
