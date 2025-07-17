@@ -34,11 +34,12 @@ public class WebTestBase {
 	protected static ExtentReports extentReport;
 	protected AutoReport autoReport;
 	private static ThreadLocal<WebDriver> threadLocalDriver = new ThreadLocal<>();
-	private static ThreadLocal<ExtentTest> threadLocalExtentTest = new ThreadLocal<>();
+//	private static ThreadLocal<ExtentTest> threadLocalExtentTest = new ThreadLocal<>();
 	
 	@BeforeSuite(alwaysRun = true)
 	public void extentReportBeforeSuite() {
-		extentReport = ExtentManager.createInstance(TestConfig.EXTENT_REPORT_FILE_PATH);
+//		extentReport = ExtentManager.createInstance(TestConfig.EXTENT_REPORT_FILE_PATH);
+		extentReport = ExtentManager.getExtentReports();
 		System.out.println("Test Execution started on : " +TestConfig.getBrowserName().toUpperCase());
 	}
 	
@@ -50,7 +51,8 @@ public class WebTestBase {
 	
 	private void setupExtentReport(Method method) {
 	    ExtentTest localTest = extentReport.createTest(method.getName());
-	    threadLocalExtentTest.set(localTest);
+//	    threadLocalExtentTest.set(localTest);
+	    ExtentManager.setTest(localTest);
 	    autoReport = new AutoReport(localTest);
 	}
 	
@@ -65,8 +67,6 @@ public class WebTestBase {
 	@AfterMethod(alwaysRun = true)
 	public void tearDown() {
 		getDriver().quit();
-		threadLocalDriver.remove();
-		threadLocalExtentTest.remove();
 	}
 	
 	public WebDriver createDriver(String browser) {
@@ -98,7 +98,8 @@ public class WebTestBase {
 	}
 	
 	public static ExtentTest getExtentTest() {
-		return threadLocalExtentTest.get();
+//		return threadLocalExtentTest.get();
+		return ExtentManager.getTest();
 	}
 	
 	@AfterMethod(alwaysRun = true)
@@ -117,6 +118,7 @@ public class WebTestBase {
 			test.pass("Test Passed");
 		}		
 		extentReport.flush();	
+		ExtentManager.removeTest();
 	}
 	
 }
