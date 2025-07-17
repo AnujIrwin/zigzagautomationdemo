@@ -19,6 +19,7 @@ public class WebDriverUtil {
 		var folderPath = "test-output/ExtentReport/screenshots/"+timeStamp;
 		new File(folderPath).mkdirs();
 		FileUtils.copyFile(takenScreenshot, new File(folderPath+"/"+screenShotName+".png"));
+		System.out.println("screenshots/"+timeStamp+"/"+screenShotName+".png");
 		return "screenshots/"+timeStamp+"/"+screenShotName+".png";
 	}
 	
