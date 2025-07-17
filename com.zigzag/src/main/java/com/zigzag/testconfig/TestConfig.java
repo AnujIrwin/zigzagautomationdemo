@@ -11,8 +11,8 @@ public class TestConfig {
 	private final static String TEST_CONFIG_FILE_PATH = "test-config.properties";
 	private final static Properties TEST_CONFIG = loadProperties();
 	public  final static String timestamp = WebDriverUtil.getTimeStamp();
-//	public  final static String EXTENT_REPORT_FILE_PATH = "ZigZagAutomationReport_"+timestamp+".html";
-	public  final static String EXTENT_REPORT_FILE_PATH = "test-output/ZigZag_AutomationReport.html";
+	public  final static String EXTENT_REPORT_FILE_PATH = "ZigZagAutomationReport_"+timestamp+".html";
+//	public  final static String EXTENT_REPORT_FILE_PATH = "test-output/ZigZag_AutomationReport.html";
 	
 	
 	private static Properties loadProperties() {
