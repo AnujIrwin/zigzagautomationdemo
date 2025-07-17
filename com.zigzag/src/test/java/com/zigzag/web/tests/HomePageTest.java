@@ -42,7 +42,7 @@ public class HomePageTest extends WebTestBase {
 								.siteHeader
 								.setTextInSearchProductsTextBoxAndSearch(textToSearch)
 								.getSearchResultText();
-		if(actualText.contains(textToSearch)) {
+		if(actualText.contains(textToSearch+"1")) {
 			assertTrue(true);
 			autoReport.pass(textToSearch+" appeared on the search result text - Test Passed");
 		}
