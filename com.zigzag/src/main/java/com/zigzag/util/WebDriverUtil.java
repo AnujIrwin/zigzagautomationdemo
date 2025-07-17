@@ -19,7 +19,7 @@ public class WebDriverUtil {
 		var folderPath = "test-output/ExtentReport/screenshots/"+timeStamp;
 		new File(folderPath).mkdirs();
 		FileUtils.copyFile(takenScreenshot, new File(folderPath+"/"+screenShotName+".png"));
-		return folderPath+"/"+screenShotName+".png";
+		return "screenshots/"+timeStamp+"/"+screenShotName+".png";
 	}
 	
 	public static String getTimeStamp() {
