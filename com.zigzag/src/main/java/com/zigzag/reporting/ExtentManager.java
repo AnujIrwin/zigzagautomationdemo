@@ -30,7 +30,6 @@ public class ExtentManager {
 		sparkReporter.config().setDocumentTitle("ZigZag Automation Report");
 		sparkReporter.config().setEncoding("utf-8");
 		sparkReporter.config().setReportName("ZigZag Automation Report");
-		sparkReporter.config().setOfflineMode(true);
 		extentReport = new ExtentReports();
 		extentReport.attachReporter(sparkReporter);
 		return extentReport;
