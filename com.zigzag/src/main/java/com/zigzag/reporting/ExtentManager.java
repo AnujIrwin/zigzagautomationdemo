@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import com.zigzag.testconfig.TestConfig;
@@ -12,8 +13,9 @@ import com.zigzag.util.WebDriverUtil;
 public class ExtentManager {
 
 	private static ExtentReports extentReport;
+	private static final ThreadLocal<ExtentTest> extentTestThread = new ThreadLocal<>();
 	
-	public static ExtentReports getInstance() {
+	public static ExtentReports getExtentReports() {
 		if(extentReport == null) {
 			var timestamp = WebDriverUtil.getTimeStamp();
 //			extentReport = createInstance("test-output/ZigZagAutomationReport"+timestamp+".html");
@@ -33,4 +35,17 @@ public class ExtentManager {
 		extentReport.attachReporter(sparkReporter);
 		return extentReport;
 	}
+	
+	public static ExtentTest getTest() {
+        return extentTestThread.get();
+    }
+
+    public static void setTest(ExtentTest test) {
+        extentTestThread.set(test);
+    }
+
+    public static void removeTest() {
+        extentTestThread.remove();
+
+    }
 }
