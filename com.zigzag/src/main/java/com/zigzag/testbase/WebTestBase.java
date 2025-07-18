@@ -35,11 +35,15 @@ public class WebTestBase {
 	protected static ExtentReports extentReport;
 	protected AutoReport autoReport;
 	private static ThreadLocal<WebDriver> threadLocalDriver = new ThreadLocal<>();
+	private static String browser; 
 
 	@BeforeSuite(alwaysRun = true)
 	public void extentReportBeforeSuite() {
 		extentReport = ExtentManager.getExtentReports();
-		System.out.println("Test Execution started on : " +TestConfig.getBrowserName().toUpperCase());
+		var browserNameSystem = System.getProperty("browser");
+		var browserNameTestConfig = TestConfig.getBrowserName();
+		browser = browserNameSystem !=null ? browserNameSystem:browserNameTestConfig;
+		System.out.println("Test Execution started on : " +browser);
 	}
 	
 	@BeforeMethod(alwaysRun = true)
