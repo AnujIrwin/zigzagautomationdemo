@@ -14,6 +14,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
@@ -34,11 +35,9 @@ public class WebTestBase {
 	protected static ExtentReports extentReport;
 	protected AutoReport autoReport;
 	private static ThreadLocal<WebDriver> threadLocalDriver = new ThreadLocal<>();
-//	private static ThreadLocal<ExtentTest> threadLocalExtentTest = new ThreadLocal<>();
-	
+
 	@BeforeSuite(alwaysRun = true)
 	public void extentReportBeforeSuite() {
-//		extentReport = ExtentManager.createInstance(TestConfig.EXTENT_REPORT_FILE_PATH);
 		extentReport = ExtentManager.getExtentReports();
 		System.out.println("Test Execution started on : " +TestConfig.getBrowserName().toUpperCase());
 	}
@@ -51,9 +50,8 @@ public class WebTestBase {
 	
 	private void setupExtentReport(Method method) {
 	    ExtentTest localTest = extentReport.createTest(method.getName());
-//	    threadLocalExtentTest.set(localTest);
 	    ExtentManager.setTest(localTest);
-	    autoReport = new AutoReport(localTest);
+	    autoReport = new AutoReport();
 	}
 	
 	private void setupDriver() {
@@ -67,6 +65,7 @@ public class WebTestBase {
 	@AfterMethod(alwaysRun = true)
 	public void tearDown() {
 		getDriver().quit();
+		ExtentManager.removeTest();
 	}
 	
 	public WebDriver createDriver(String browser) {
@@ -98,7 +97,6 @@ public class WebTestBase {
 	}
 	
 	public static ExtentTest getExtentTest() {
-//		return threadLocalExtentTest.get();
 		return ExtentManager.getTest();
 	}
 	
@@ -117,8 +115,12 @@ public class WebTestBase {
 		else {
 			test.pass("Test Passed");
 		}		
-		extentReport.flush();	
-		ExtentManager.removeTest();
+		
+	}
+	
+	@AfterSuite(alwaysRun = true)
+	public void flushExtentReport() {
+		extentReport.flush();
 	}
 	
 }
