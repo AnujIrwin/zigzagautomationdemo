@@ -44,10 +44,10 @@ public class HomePageTest extends WebTestBase {
 								.getSearchResultText();
 		if(actualText.contains(textToSearch)) {
 			assertTrue(true);
-			autoReport.pass(textToSearch+" appeared on the search result text - Test Passed");
+			autoReport.pass(textToSearch +" appeared on the search result text - Test Passed");
 		}
 		else {
-			assertTrue(false,textToSearch+ " did not appear in the result text - Test Failed");
+			assertTrue(false,textToSearch + " did not appear in the result text - Test Failed");
 		}
 	}
 }
