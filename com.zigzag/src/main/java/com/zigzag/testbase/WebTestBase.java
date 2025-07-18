@@ -55,7 +55,10 @@ public class WebTestBase {
 	}
 	
 	private void setupDriver() {
-	    WebDriver localDriver = createDriver(TestConfig.getBrowserName());
+		var browserNameSystem = System.getProperty("browser");
+		var browserNameTestConfig = TestConfig.getBrowserName();
+		var browser = browserNameSystem !=null ? browserNameSystem:browserNameTestConfig;
+	    var localDriver = createDriver(browser);
 	    threadLocalDriver.set(localDriver);
 	    localDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
 	    localDriver.manage().window().maximize();
