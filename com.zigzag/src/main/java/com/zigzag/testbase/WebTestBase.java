@@ -42,7 +42,7 @@ public class WebTestBase {
 		extentReport = ExtentManager.getExtentReports();
 		var browserNameSystem = System.getProperty("browser");
 		var browserNameTestConfig = TestConfig.getBrowserName();
-		browser = browserNameSystem !=null ? browserNameSystem:browserNameTestConfig;
+		browser = browserNameSystem !=null ? browserNameSystem:browserNameTestConfig ;
 		System.out.println("Test Execution started on : " +browser);
 	}
 	
