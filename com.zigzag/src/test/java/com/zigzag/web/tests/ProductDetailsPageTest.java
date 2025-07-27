@@ -46,7 +46,7 @@ public class ProductDetailsPageTest extends WebTestBase {
 									.getWordSectionNoteText();
 		var testCaseStep = "Note should be present in the page with the full text";
 		
-		assertEquals(actualNoteText,expectedNoteText,reportTestStepFailure(testCaseStep));
+		assertEquals(actualNoteText,expectedNoteText+"1",reportTestStepFailure(testCaseStep));
 		reportTestStepPassed(testCaseStep);
 	}
 }
