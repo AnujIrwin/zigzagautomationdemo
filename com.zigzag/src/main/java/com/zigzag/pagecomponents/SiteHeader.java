@@ -21,6 +21,9 @@ public class SiteHeader extends PageComponentBase {
 	@FindBy(css="div .popup-navigation__search input[type=search]")
 	WebElement searchProductsPopUpTextBox;
 	
+	@FindBy(xpath = "//a[@class='d-flex align-items-center']//span[text()='Dresses']")
+	WebElement dressesMenu;
+	
 	public SiteHeader(TestContext testContext) {
 		super(testContext);
 	}
@@ -61,4 +64,12 @@ public class SiteHeader extends PageComponentBase {
 	public void setTextInSearchProductsPopUpTextBox(String text) {
 		sendKeys(searchProductsPopUpTextBox,text);
 	}
+	
+	public ProductListingPage clickDressesMenu() {
+		autoReport.logMethodAction(getClassName(this), getMethodName());
+		click(dressesMenu);
+		return new ProductListingPage(testContext);
+	}
+	
+	
 }

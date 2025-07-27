@@ -6,14 +6,15 @@ import com.aventstack.extentreports.model.Media;
 public class AutoReport {
 	
 	public void logMethodAction(String className, String methodInfo) {
-		String readableClassName = toReadableText(className);
-		String readableMethodName = toReadableText(methodInfo.replace("()", ""));
-		log(Status.INFO,String.format("Perform %s => %s", readableClassName,readableMethodName));
+		var readableClassName = toReadableText(className);
+		var readableMethodName = toReadableText(methodInfo.replace("()", ""));
+		var actionToReport = String.format("Perform on %s => %s", readableClassName,readableMethodName);
+		log(Status.INFO,actionToReport);
 	}
 	
-	 public void log(Status status, String details) {
-	        ExtentManager.getTest().log(status, details); 
-	    }
+	public void log(Status status, String details) {
+	    ExtentManager.getTest().log(status, details); 
+	}
 	
 	public void log(Status status, Throwable t) {
 		ExtentManager.getTest().log(status, t);	

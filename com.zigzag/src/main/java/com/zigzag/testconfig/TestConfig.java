@@ -26,8 +26,8 @@ public class TestConfig {
 		return testConfig;
 	}
 	
-	public static String getHomePageLink() {
-		return TEST_CONFIG.get("homepagelink").toString();
+	public static String getBaseUrlLink() {
+		return TEST_CONFIG.get("baseurl").toString();
 	}
 	
 	public static String getBrowserName() {

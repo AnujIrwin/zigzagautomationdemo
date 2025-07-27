@@ -20,6 +20,7 @@ import org.testng.annotations.BeforeSuite;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.zigzag.reporting.AutoReport;
 import com.zigzag.reporting.ExtentManager;
@@ -43,7 +44,7 @@ public class WebTestBase {
 		var browserNameSystem = System.getProperty("browser");
 		var browserNameTestConfig = TestConfig.getBrowserName();
 		browser = browserNameSystem !=null ? browserNameSystem:browserNameTestConfig ;
-		System.out.println("Test Execution started on : " +browser);
+		System.out.println("Test Execution started on : " +browser);		
 	}
 	
 	@BeforeMethod(alwaysRun = true)
@@ -64,15 +65,15 @@ public class WebTestBase {
 		var browser = browserNameSystem !=null ? browserNameSystem:browserNameTestConfig;
 	    var localDriver = createDriver(browser);
 	    threadLocalDriver.set(localDriver);
-	    localDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+	    localDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 	    localDriver.manage().window().maximize();
 	    testContext = new TestContext(localDriver, autoReport);
 	}
 	
 	@AfterMethod(alwaysRun = true)
 	public void tearDown() {
-		getDriver().quit();
 		ExtentManager.removeTest();
+		getDriver().quit();
 	}
 	
 	public WebDriver createDriver(String browser) {
@@ -116,13 +117,20 @@ public class WebTestBase {
 		if(result.getStatus() != ITestResult.SUCCESS)
 		{
 			var screenshotPath =new WebDriverUtil().takeScreenshot(getDriver(), testCaseName);
-			test.addScreenCaptureFromPath(screenshotPath);
-			test.fail(result.getThrowable());
+			test.fail(result.getThrowable(),
+							MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
 		}
 		else {
-			test.pass("Test Passed");
-		}		
-		
+			test.pass("✅ Test Case Passed");
+		}				
+	}
+	
+	public void reportTestStepPassed(String testStepDetail) {
+		autoReport.log(Status.PASS, "✅ Test Step Passed - "+testStepDetail);;
+	}
+	
+	public String reportTestStepFailure(String testStepDetail) {
+		return "❌ Test Step Failed - "+testStepDetail;
 	}
 	
 	@AfterSuite(alwaysRun = true)

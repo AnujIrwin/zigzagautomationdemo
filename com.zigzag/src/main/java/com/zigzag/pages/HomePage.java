@@ -31,7 +31,7 @@ public class HomePage extends PageObjectBase{
 	
 	public HomePage loadHomePage() {
 		autoReport.logMethodAction(getClassName(this), getMethodName());
-		driver.get(TestConfig.getHomePageLink());
+		testContext.getDriver().get(TestConfig.getBaseUrlLink());
 		try{
 			waitForElementVisible(popUpCloseButton);
 			click(popUpCloseButton);
@@ -46,13 +46,13 @@ public class HomePage extends PageObjectBase{
 	
 	public boolean isAboutUsLinkDisplayed() {
 		autoReport.logMethodAction(getClassName(this), getMethodName());
-		return aboutUsLink.isDisplayed();
+		return isElementDisplayed(aboutUsLink);
 	}
 	
 	
 	public boolean isSliderDisplayed() {
 		autoReport.logMethodAction(getClassName(this), getMethodName());
-		return slider.isDisplayed();
+		return isElementDisplayed(slider);
 	}
 
 }

@@ -26,5 +26,7 @@ public class WebDriverUtil {
 	public static String getTimeStamp() {
 		return new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss").format(new Date());
 	}
+	
+	
 
 }
