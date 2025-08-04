@@ -41,7 +41,7 @@ public class SiteHeader extends PageComponentBase {
 	
 	public boolean isSearchProductsPopUpTextBoxDisplayed() {
 		try {
-			waitFor(ExpectedConditions.visibilityOf(searchProductsPopUpTextBox));
+			waitForCondition(ExpectedConditions.visibilityOf(searchProductsPopUpTextBox));
 			return searchProductsPopUpTextBox.isDisplayed();
 		} catch (Exception e) {
 			return false;

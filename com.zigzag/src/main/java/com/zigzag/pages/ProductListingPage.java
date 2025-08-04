@@ -59,7 +59,7 @@ public class ProductListingPage extends PageObjectBase {
 	
 	public int getProductsCount() {
 		autoReport.logMethodAction(getClassName(this), getMethodName());
-		waitFor(ExpectedConditions.visibilityOfAllElements(productItems));
+		waitForCondition(ExpectedConditions.visibilityOfAllElements(productItems));
 		return productItems.size();
 	}
 	

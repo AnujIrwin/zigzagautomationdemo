@@ -79,12 +79,12 @@ public class POMBase {
 		sendKeys(element,string);
 	}
 	
-	protected <T> void waitFor(ExpectedCondition<T> condition) {
+	protected <T> void waitForCondition(ExpectedCondition<T> condition) {
 		wait.until(condition);
 	}
 	
 	protected String getTextFromElement(WebElement element) {
-		waitFor(ExpectedConditions.visibilityOf(element));
+		waitForCondition(ExpectedConditions.visibilityOf(element));
 		moveToElement(element);
 		return element.getText();
 	}
@@ -104,6 +104,14 @@ public class POMBase {
 	protected boolean isElementDisplayed(WebElement element) {
 		try {
 			return element.isDisplayed();
+		}catch(NoSuchElementException e){
+			return false;
+		}
+	}
+	
+	protected boolean isElementEnabled(WebElement element) {
+		try {
+			return element.isEnabled();
 		}catch(NoSuchElementException e){
 			return false;
 		}
